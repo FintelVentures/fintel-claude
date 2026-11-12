@@ -1,0 +1,11 @@
+{
+  "name": "fintel",
+  "owner": { "name": "Fintel", "url": "https://fintel.io" },
+  "plugins": [
+    {
+      "name": "fintel",
+      "source": "./",
+      "description": "Research stocks with Fintel's financial data and account tools inside Claude."
+    }
+  ]
+}
