@@ -1,6 +1,6 @@
 ---
 name: fintel-watchlist-triage
-description: Triage the user's Fintel stock lists. Use when asked to review a watchlist, what changed across my lists, or which names on a list need attention.
+description: Review a signed-in user's Fintel stock list using list-level filings, insider and ownership evidence to prioritize names for investigation or monitoring. Use for private watchlist triage; this does not edit lists or review a public manager portfolio.
 ---
 
 # Watchlist triage

@@ -1,6 +1,6 @@
 ---
 name: fintel-earnings-review
-description: Review a company's earnings with Fintel data. Use when asked about earnings results, a beat or miss, estimates versus actuals, guidance, or what changed this quarter.
+description: Review reported earnings results, actual versus estimated figures, supported period comparisons and open questions. Use after results; use earnings-preview before an announcement and earnings-quality-review for profit-to-cash analysis.
 ---
 
 # Earnings review
@@ -16,7 +16,11 @@ unavailable, stop and say so.
   available rather than guessing.
 - Why the surprise likely happened, labelled as interpretation.
 - Unresolved questions to watch on the next report. Use `fintel.get_security_earnings_calendar` for
-  the next date and `fintel.get_security_forecast` for forward estimates when available.
+  the next date and `fintel.get_security_analyst_estimates` for period-specific forward estimates
+  when available. `fintel.get_security_earnings_surprises` and
+  `fintel.get_security_earnings_price_drift` can add historical context. Preserve EPS basis and
+  currency; exact calendar-day reactions are not trading-session moves. Use earnings-preview for
+  a pre-announcement briefing and earnings-quality-review for cash conversion analysis.
 
 ## Conventions (all Fintel skills)
 

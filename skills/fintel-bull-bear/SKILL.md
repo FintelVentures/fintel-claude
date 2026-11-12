@@ -1,6 +1,6 @@
 ---
 name: fintel-bull-bear
-description: Present balanced bull and bear cases for a stock with Fintel data. Use when asked for both sides, pros and cons, a debate, or to stress-test a view.
+description: Stress-test a stock thesis with the strongest supported bull and bear cases, shared assumptions, conflicting evidence and observations that would settle disagreements. Use when the user requests both sides or challenges an existing view.
 ---
 
 # Bull and bear review

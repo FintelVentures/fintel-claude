@@ -1,6 +1,6 @@
 ---
 name: fintel-claim-audit
-description: Audit claims in a conversation or pasted text for support. Use when the user asks to fact-check, verify, or grade claims about a stock or a discussion.
+description: Check financial claims in supplied text or a discussion against cited evidence and available Fintel observations. Identify unsupported, stale, conflicting or unverifiable claims and citation mismatches without manufacturing outside support.
 ---
 
 # Claim audit

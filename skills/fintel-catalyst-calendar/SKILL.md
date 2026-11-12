@@ -1,13 +1,14 @@
 ---
 name: fintel-catalyst-calendar
-description: List upcoming dated catalysts for a company from Fintel data. Use when asked what is coming up, upcoming earnings or dividend dates, ex-dividend dates, or events to watch.
+description: Build a dated calendar of upcoming earnings, dividends and supported biotech events for one company, preserving estimated windows and coverage gaps. Use for timing; use earnings-preview or biotech-event-due-diligence for deeper event analysis.
 ---
 
 # Catalyst calendar
 
 Resolve one security, then require its canonical calendars:
 `fintel.get_security_earnings_calendar` and `fintel.get_security_dividend_calendar`. Biotech names
-may also have `fintel.list_biotech_catalysts`.
+may also have `fintel.get_security_biotech_catalysts`; use returned published IDs with
+`fintel.get_biotech_catalyst` when event details matter. Use biotech-event-due-diligence for trial analysis.
 
 ## Output
 

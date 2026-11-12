@@ -1,7 +1,7 @@
 {
   "name": "fintel",
-  "version": "0.1.0",
-  "description": "Research stocks with Fintel's financial data and account tools inside Claude.",
+  "version": "0.2.0",
+  "description": "Research stocks, funds and public manager portfolios with 23 Fintel skills covering earnings, valuation, dividends, insiders, short selling, options, biotech catalysts and watchlists.",
   "author": {
     "name": "Fintel",
     "url": "https://fintel.io",

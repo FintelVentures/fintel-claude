@@ -1,11 +1,14 @@
 {
   "name": "fintel",
-  "owner": { "name": "Fintel", "url": "https://fintel.io" },
+  "owner": {
+    "name": "Fintel",
+    "url": "https://fintel.io"
+  },
   "plugins": [
     {
       "name": "fintel",
       "source": "./",
-      "description": "Research stocks with Fintel's financial data and account tools inside Claude."
+      "description": "Research stocks, funds and public manager portfolios with 23 Fintel skills covering earnings, valuation, dividends, insiders, short selling, options, biotech catalysts and watchlists."
     }
   ]
 }

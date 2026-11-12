@@ -1,6 +1,6 @@
 ---
 name: fintel-stock-discovery
-description: Find stocks worth researching from Fintel leaderboards and rankings. Use when the user asks for top or best stocks, a screen, ideas, short squeeze candidates, high dividend yields, gainers/losers, or 'what should I look at'.
+description: Find research candidates from Fintel leaderboards and rankings, including squeeze candidates, yield leaders and market movers. Use for ranked shortlists; use screen-builder to design custom criteria and specialist assessments to investigate one returned stock.
 ---
 
 # Stock discovery

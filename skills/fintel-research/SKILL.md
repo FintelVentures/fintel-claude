@@ -1,12 +1,11 @@
 ---
 name: fintel-research
-description: Research stocks and companies with Fintel data. Use for any question about a ticker or company, ownership, insider activity, short interest, dividends, analyst views or the user's Fintel account, when no more specific Fintel skill fits.
+description: Answer focused stock, fund, financial-data or Fintel account questions using the live MCP tool catalog. Use for lookups and general research when no specialist workflow fits; prefer specialist skills for a full assessment.
 ---
 
 # Fintel research
 
-General workflow for Fintel questions. More specific skills exist for discovery, thesis, earnings,
-bull/bear, catalysts, watchlist triage, claim audits and scenarios; prefer them when they fit.
+General workflow for focused Fintel questions. Prefer dedicated skills for discovery, thesis, reported earnings, bull/bear, catalysts, watchlist triage, claim audits and scenarios. Fourteen specialists cover short squeezes, insider signals, dividend sustainability, institutional positioning, options positioning, biotech due diligence, cash runway/dilution, valuation expectations, screen design, earnings previews, earnings quality, analyst expectations, fund holdings and public manager portfolios. Use those for a full assessment rather than assembling an incomplete generic response.
 
 ## Workflow
 
@@ -18,20 +17,22 @@ bull/bear, catalysts, watchlist triage, claim audits and scenarios; prefer them 
 
 ## Tool map (verify against the live tool list)
 
-| Question | Tools |
-| --- | --- |
-| Identify / look up | `fintel.search_securities`, `fintel.get_security`, `fintel.lookup_identifier` |
-| Prices | `fintel.get_last_price`, `fintel.get_price_bars` |
-| Ownership | `fintel.get_security_owners` |
-| Insiders | `fintel.get_security_insiders` |
-| Short selling | `fintel.get_short_interest`, `fintel.get_short_volume`, `fintel.get_borrow_rate`, `fintel.get_fails_to_deliver` |
-| Dividends / earnings | `fintel.get_security_dividends`, `fintel.get_security_earnings`, `fintel.get_security_data_point` |
-| Analysts | `fintel.get_security_analyst_ratings`, `fintel.get_security_price_targets`, `fintel.get_security_forecast` |
-| Rankings / boards | `fintel.get_security_rankings`, `fintel.list_leaderboards`, `fintel.get_leaderboard` |
-| Definitions of a metric | `fintel.list_data_definitions`, `fintel.get_data_definition` |
-| The user's account and lists | `fintel.get_account`, `fintel.list_stock_lists`, `fintel.get_stock_list` |
+- Identity: `fintel.search_securities`, `fintel.get_security`, `fintel.lookup_identifier`. For managers use `fintel.search_managers`, then the returned `managerId` with `fintel.get_manager_portfolio_changes`.
+- Prices: `fintel.get_last_price`, `fintel.get_price_bars`.
+- Disclosed stock ownership: `fintel.get_security_owners` for a bounded page and `fintel.get_security_ownership_activity` for population totals. Fund composition: `fintel.get_fund_holdings_snapshot` for native NPORT holdings, allocations and flows.
+- Insiders: `fintel.get_security_insiders`. Classifications, filing dates and trade dates matter; omitted plan information remains unknown.
+- Short selling: `fintel.get_short_interest`, `fintel.get_short_volume`, `fintel.get_borrow_rate`, `fintel.get_fails_to_deliver`. Short-sale volume and FTDs cannot substitute for short interest.
+- Dividends and earnings: `fintel.get_security_dividends`, `fintel.get_security_earnings`, `fintel.get_security_dividend_calendar`, `fintel.get_security_earnings_calendar`, `fintel.get_security_earnings_surprises`, `fintel.get_security_earnings_price_drift`.
+- Analyst views: `fintel.get_security_analyst_ratings`, `fintel.get_security_price_targets`, `fintel.get_security_forecast`, `fintel.get_security_analyst_estimates`. Forecast periods do not establish consensus snapshot freshness or historical revisions.
+- Financial statements and calculations: `fintel.get_security_financial_statement` (balance, income, cash_flow) and `fintel.calculate_research_scenario` (cash_runway, reverse_valuation, earnings_quality). Match financial periods, currency and scale; normalize capex to positive spending, and omit unknown inputs rather than guessing zeros.
+- Options: `fintel.get_security_options_flow_sentiment`, `fintel.get_security_options_sentiment_by_expiration`, `fintel.get_security_implied_volatility`, `fintel.get_security_gamma_exposure`. Preserve session/quote/expiration dates and model assumptions.
+- Biotech: `fintel.get_security_biotech_catalysts`, then `fintel.get_biotech_catalyst` using a returned published ID for detail. Empty coverage is not an invented pipeline.
+- Peers: `fintel.get_security_peers`, `fintel.get_security_peer_analysis` for the curated set and comparison provenance.
+- Rankings: `fintel.get_security_rankings`, `fintel.list_leaderboards`, `fintel.get_leaderboard`.
+- Definitions and individual metrics: `fintel.list_data_definitions`, `fintel.get_data_definition`, `fintel.get_security_data_point`. Use exact returned keys and units; criteria previews do not execute a screen.
+- The user's account and lists: `fintel.get_account`, `fintel.list_stock_lists`, `fintel.get_stock_list`, `fintel.list_stock_list_items`. Restrict private reads to account-related requests.
 
-Filing-based data (for example 13F ownership) lags the period end; say so.
+Filing-based data lags the period end. Keep report periods separate from filing and retrieval dates. Top-N excerpts cannot establish absent holdings or whole-portfolio overlap. Numeric values returned as normalized dollars do not need an additional historical thousands conversion.
 
 ## Conventions (all Fintel skills)
 

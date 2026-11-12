@@ -1,6 +1,6 @@
 ---
 name: fintel-scenario-analysis
-description: Frame upside, base and downside scenarios for a company or event using Fintel data. Use when asked 'what if', scenarios, sensitivity, or how an event could affect a stock.
+description: Frame conditional upside, base and downside outcomes for a company or event with a common horizon, explicit assumptions, triggers and invalidation conditions. Use for what-if analysis; use valuation-expectations or dilution-and-runway for their dedicated calculations.
 ---
 
 # Scenario analysis

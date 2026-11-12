@@ -1,6 +1,6 @@
 ---
 name: fintel-investment-thesis
-description: Build an evidence-based investment thesis for one company with Fintel data. Use when asked for a thesis, a deep dive, 'is X a good investment', or the case for or against a stock.
+description: Build a sourced investment thesis for one company with supporting and contradicting evidence, catalysts, risks, assumptions and invalidation conditions. Use for a deep dive or investment case rather than a narrow metric or specialist assessment.
 ---
 
 # Investment thesis
