@@ -1,39 +1,52 @@
 ---
 name: fintel-research
-description: Research stocks and companies with Fintel data. Use when the user asks about a ticker or company, ownership, institutional holders, short interest, insider activity, filings, or wants Fintel account information.
+description: Research stocks and companies with Fintel data. Use for any question about a ticker or company, ownership, insider activity, short interest, dividends, analyst views or the user's Fintel account, when no more specific Fintel skill fits.
 ---
 
 # Fintel research
 
-Use the Fintel connector's tools for market data. Do not answer from memory when the connector can
-provide the figure, because ownership, short-interest and filing data change often.
+General workflow for Fintel questions. More specific skills exist for discovery, thesis, earnings,
+bull/bear, catalysts, watchlist triage, claim audits and scenarios; prefer them when they fit.
 
 ## Workflow
 
-1. Identify the security. If the ticker or company is ambiguous, ask or look it up with the
-   connector's search tool before fetching data.
-2. Discover what is available. Review the connector's tool list and pick the tools that match the
-   question; the catalog grows over time, so do not assume a fixed set.
-3. Fetch only what the question needs, then answer directly. Prefer one or two focused calls to a
-   broad data pull.
-4. Present results clearly: lead with the answer, then a short table or bullets with the key
-   figures.
+1. Resolve the security with `fintel.search_securities` (or `fintel.get_security` /
+   `fintel.lookup_identifier` for an exact identifier). Ask if the match is ambiguous.
+2. Discover what is available from the connector's tool list; the catalog grows, so do not assume a
+   fixed set. Pick the fewest tools that answer the question.
+3. Answer first, then support with a short table or bullets of the key figures.
 
-## Accuracy and sourcing
+## Tool map (verify against the live tool list)
 
-- Always state the as-of date or reporting period returned with the data. Filing-based data such as
-  13F holdings lags the quarter end.
-- Say which Fintel data the figures came from. Never invent a value the tools did not return; if a
-  call fails or returns nothing, say so.
-- This is research support, not investment advice. Do not recommend buying or selling.
+| Question | Tools |
+| --- | --- |
+| Identify / look up | `fintel.search_securities`, `fintel.get_security`, `fintel.lookup_identifier` |
+| Prices | `fintel.get_last_price`, `fintel.get_price_bars` |
+| Ownership | `fintel.get_security_owners` |
+| Insiders | `fintel.get_security_insiders` |
+| Short selling | `fintel.get_short_interest`, `fintel.get_short_volume`, `fintel.get_borrow_rate`, `fintel.get_fails_to_deliver` |
+| Dividends / earnings | `fintel.get_security_dividends`, `fintel.get_security_earnings`, `fintel.get_security_data_point` |
+| Analysts | `fintel.get_security_analyst_ratings`, `fintel.get_security_price_targets`, `fintel.get_security_forecast` |
+| Rankings / boards | `fintel.get_security_rankings`, `fintel.list_leaderboards`, `fintel.get_leaderboard` |
+| Definitions of a metric | `fintel.list_data_definitions`, `fintel.get_data_definition` |
+| The user's account and lists | `fintel.get_account`, `fintel.list_stock_lists`, `fintel.get_stock_list` |
 
-## Actions that change something
+Filing-based data (for example 13F ownership) lags the period end; say so.
 
-If a tool would create, edit or delete anything in the user's Fintel account, describe the change
-and get the user's explicit confirmation first. Read-only lookups need no confirmation.
+## Conventions (all Fintel skills)
 
-## Account and credits
-
-Tool calls use the connected user's Fintel API credits and entitlements. If a tool reports a
-quota, entitlement or sign-in problem, relay it plainly and point the user to https://fintel.io
-rather than retrying repeatedly.
+- Use the Fintel connector for market data, never memory. Call only the tools you need and report
+  the as-of date or period the tools return.
+- Use the company `name` returned by Fintel. Never infer a company name from a ticker.
+- Fail closed: if a tool this workflow requires is unavailable or returns nothing, say what is
+  missing and what you could not assess. Do not substitute outside web research or invent figures.
+- Finish with a short coverage note (examined, unavailable, stale), then ONE bounded next step that
+  names its subject, for example "Want me to run an earnings review on NVDA?" A plain "yes" then
+  resumes that action.
+- If asked which option you prefer, answer directly: state the preference first, then the criteria,
+  the key assumption, and what would change it. Name the missing fact if evidence is incomplete.
+  Do not refuse with boilerplate such as "I can't give recommendations".
+- Analysis is not authorization. Never create, change or delete anything in the user's Fintel
+  account (stock lists, alerts, notebooks, team content) without describing the change and getting
+  explicit confirmation first. Read-only lookups need none.
+- This is research support, not personalized investment advice.

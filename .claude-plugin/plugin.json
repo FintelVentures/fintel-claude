@@ -2,9 +2,23 @@
   "name": "fintel",
   "version": "0.1.0",
   "description": "Research stocks with Fintel's financial data and account tools inside Claude.",
-  "author": { "name": "Fintel", "url": "https://fintel.io" },
+  "author": {
+    "name": "Fintel",
+    "url": "https://fintel.io"
+  },
   "homepage": "https://fintel.io",
   "repository": "https://github.com/FintelVentures/fintel-claude",
   "license": "MIT",
-  "keywords": ["finance", "stocks", "investing", "market-data", "fintel"]
+  "keywords": [
+    "finance",
+    "stocks",
+    "investing",
+    "market-data",
+    "fintel"
+  ],
+  "icon": "./.claude-plugin/icon.png",
+  "documentationUrl": "https://github.com/FintelVentures/fintel-claude#readme",
+  "supportUrl": "https://fintel.io",
+  "privacyPolicyUrl": "https://fintel.io/privacy",
+  "termsOfServiceUrl": "https://fintel.io/terms"
 }
