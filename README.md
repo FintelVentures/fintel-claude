@@ -51,8 +51,9 @@ Disconnect any time at https://fintel.io/oauth/connections.
 /plugin install fintel@fintel
 ```
 
-Claude Code completes OAuth through a `localhost` callback, which Fintel does not allow yet, so use
-Claude on the web or desktop for sign-in until that changes.
+Claude Code signs in through a `localhost` callback. Fintel accepts loopback callbacks
+(`localhost`, `127.0.0.1`, `[::1]` on any port, path `/callback` or `/oauth/callback`), and the
+consent page shows it as "An app on this computer".
 
 **Claude.ai / desktop:** install from the Claude directory once listed, or add the connector URL
 `https://mcp.fintel.io/mcp` under Settings > Connectors > Add custom connector.
