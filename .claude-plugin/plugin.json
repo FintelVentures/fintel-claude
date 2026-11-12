@@ -4,7 +4,8 @@
   "description": "Research stocks with Fintel's financial data and account tools inside Claude.",
   "author": {
     "name": "Fintel",
-    "url": "https://fintel.io"
+    "url": "https://fintel.io",
+    "email": "help@fintel.io"
   },
   "homepage": "https://fintel.io",
   "repository": "https://github.com/FintelVentures/fintel-claude",

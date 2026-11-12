@@ -69,7 +69,7 @@ Claude on the web or desktop for sign-in until that changes.
 
 ## Support
 
-https://fintel.io - Terms: https://fintel.io/terms - Privacy: https://fintel.io/privacy
+Email help@fintel.io - https://fintel.io - Terms: https://fintel.io/terms - Privacy: https://fintel.io/privacy
 
 ## License
 
