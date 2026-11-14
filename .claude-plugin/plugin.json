@@ -1,7 +1,7 @@
 {
   "name": "fintel",
-  "version": "0.2.2",
-  "description": "Research stocks, funds and public manager portfolios with 24 Fintel skills covering earnings, valuation, dividends, insiders, short selling, options, biotech catalysts, custom screening, technical analysis and watchlists.",
+  "version": "0.3.0",
+  "description": "Research stocks, funds and public manager portfolios with 28 Fintel skills, including company briefings, earnings, peer comparisons, dividends, reverse valuation, short squeezes, options investigations and watchlist briefings.",
   "author": {
     "name": "Fintel",
     "url": "https://fintel.io",

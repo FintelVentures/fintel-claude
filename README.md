@@ -8,7 +8,7 @@ account tools. The plugin bundles:
 
 ## Skills
 
-Version 0.2.2 bundles 24 portable skills: nine established workflows and fifteen specialist assessments. Each linked skill describes when to use it, its evidence tools, output and limitations. All tools require an authenticated MCP connection and the account's entitlements; inspect the live tool list before relying on a dependency. A package version does not prove that the matching server tools have been deployed.
+Version 0.3.0 bundles 28 portable skills, including all ten R1 investment-question outcomes. Each linked skill describes when to use it, its evidence tools, output and limitations. All tools require an authenticated MCP connection and the account's entitlements; inspect the live tool list before relying on a dependency. A package version does not prove that the matching server tools have been deployed.
 
 ### Established workflows
 
@@ -41,6 +41,23 @@ Version 0.2.2 bundles 24 portable skills: nine established workflows and fifteen
 
 - [`fintel-technical-analysis`](skills/fintel-technical-analysis/SKILL.md): Describe intraday OHLCV, session VWAP and compatible benchmark comparisons. IEX volume is sampled; historical signal testing is deferred.
 
+### First packaged investment-question release
+
+New portable workflows:
+
+- [`fintel-company-briefing`](skills/fintel-company-briefing/SKILL.md): business, valuation, growth, financial strength, ownership and events with dated evidence.
+- [`fintel-peer-comparison`](skills/fintel-peer-comparison/SKILL.md): curated peers with consistent growth, profitability and valuation measures.
+- [`fintel-unusual-options-investigation`](skills/fintel-unusual-options-investigation/SKILL.md): flagged trades and same-window context with alternative explanations.
+- [`fintel-watchlist-briefing`](skills/fintel-watchlist-briefing/SKILL.md): dated developments across a requested saved list or supplied universe, without unsolicited changes.
+
+The other six R1 outcomes reuse `fintel-earnings-preview`, `fintel-earnings-review`,
+`fintel-dividend-sustainability`, `fintel-valuation-expectations` (reverse valuation),
+`fintel-short-squeeze-assessment` and `fintel-options-positioning-review` (options briefing).
+Each includes evidence-gap behavior and release evaluation cases. All ten use the common scope,
+evidence validation, calculation/lineage, interpretation, conclusion/counterevidence/change
+conditions and requested-only persistence structure. These are instructions over existing tools;
+source coverage and account entitlements remain authoritative.
+
 ### Evidence and capability boundaries
 
 - Resolve security listings for company or fund analysis; public manager research instead resolves an identity with `fintel.search_managers`. Screening starts with `fintel.get_screening_capabilities`, followed by metric definitions and validation. Ambiguity requires clarification.
@@ -49,9 +66,9 @@ Version 0.2.2 bundles 24 portable skills: nine established workflows and fifteen
 - Screen builder validates and executes custom programs, polls/pages results, and supports user-requested saved screens and historical replay when the live tools are deployed. Execution does not save a definition. Manager comparisons and fund holdings are delayed disclosures, not current trades or complete live portfolios. Scenarios use explicit assumptions and do not promise returns or event probabilities.
 - The general research skill maps the current tool families. Prefer a specialist for a full assessment, a simple lookup for a single figure, and stock discovery for an existing ranked shortlist.
 
-Fourteen existing specialists correspond to the versioned contracts documented in `fintel-web/docs/Agentic-Message-Board-MCP-Plan.md`. The technical-analysis workflow is portable and does not add a separate server-side agent contract. Their adjacent evaluation cases cover sparse data and misleading interpretations. Packaging validation is separate from live-model evaluation of factual support, citations, freshness, entitlements and latency. These portable instructions do not enforce the server-side Fintel agent's deterministic evidence gates; Claude executes the workflow through the authenticated MCP tools.
+Sixteen specialists, including company briefing and unusual-options investigation, correspond to the versioned contracts documented in `fintel-web/docs/Agentic-Message-Board-MCP-Plan.md`. The technical-analysis workflow is portable and does not add a separate server-side agent contract. Their adjacent evaluation cases cover sparse data and misleading interpretations. Packaging validation is separate from live-model evaluation of factual support, citations, freshness, entitlements and latency. These portable instructions do not enforce the server-side Fintel agent's deterministic evidence gates; Claude executes the workflow through the authenticated MCP tools.
 
-The package does not yet include dedicated filing-delta, peer-comparison, private-portfolio-exposure, thread-synthesis, watchlist-review/curation/building or profile-building skills. Some underlying tools are available; absence of a portable skill is not evidence that its tools are unavailable. No macro-outlook skill is included because the implemented workflows do not establish adequate macroeconomic data coverage.
+The package does not yet include dedicated filing-delta, private-portfolio-exposure, thread-synthesis, watchlist-review/curation/building or profile-building skills; the new watchlist-briefing skill reuses existing list-review capabilities. Some underlying tools are available; absence of a portable skill is not evidence that its tools are unavailable. No macro-outlook skill is included because the implemented workflows do not establish adequate macroeconomic data coverage.
 
 ## Sign-in
 
@@ -95,3 +112,10 @@ Email help@fintel.io - https://fintel.io - Terms: https://fintel.io/terms - Priv
 MIT, see `LICENSE`.
 
 Screening instructions in 0.2.1 are synchronized with the OpenAI package 0.2.4. Deploy the matching API/common/jobs/web screening implementation, refresh the host catalog and verify authenticated execution; source/package validation does not establish a live-host pass.
+
+Version 0.3.0 is synchronized with OpenAI 0.3.0. Export both plugins with the maintained
+`fintel-api/integrations/package-openai-plugin.py` script (`--provider claude` for this plugin).
+The exporter verifies byte-for-byte skill/reference parity and excludes marketplace wrappers
+from a single-plugin archive. An exported ZIP is not a published marketplace update or a
+recorded live-host evaluation. Current source-mode changes require normal application deployment
+and restart; installing portable instructions alone does not deploy server contracts.

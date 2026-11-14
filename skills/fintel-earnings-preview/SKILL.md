@@ -23,3 +23,20 @@ Forecast fiscal periods do not establish estimate snapshot freshness. Do not inf
 Example: “Prepare an earnings preview for US:NVDA; what should I watch?”
 
 Write in the user’s language. Cite material observations with their source dates and clearly identify missing metadata. Read [evaluation cases](references/evaluation-cases.md) when validating this skill or preparing a release.
+
+## Research operating contract
+
+Define the requested security/universe, horizon and benchmark; state unspecified or not
+applicable rather than inventing them. Validate observation dates, units, financial periods,
+coverage and conflicting sources before combining evidence. Show formulas, input lineage and
+explicit assumptions for calculations. Keep observations, inferred signals and scenarios separate.
+Return a conclusion with contrary evidence, unresolved questions and what would change the
+assessment. Save or monitor only when requested, through the existing authorization and
+confirmation controls; a research request does not authorize persistent changes.
+
+When exposed and entitled, `fintel.get_security_analyst_estimate_revisions` may add retained
+same-fiscal-period revision evidence, including receipt dates, contributors and dispersion.
+Respect missing receipts, earliest coverage and unknown accounting/currency basis. Optional
+`fintel.get_security_earnings_event_study` provides explicitly benchmarked session-window context;
+keep it separate from the legacy calendar-day drift. Never label current consensus as the
+historical pre-announcement expectation without retained supporting evidence.

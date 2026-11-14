@@ -18,3 +18,26 @@ Explain payment history and cuts, payout coverage, leverage, counterevidence and
 Example: “Is ABC's dividend supported by cash generation?”
 
 Read [evaluation cases](references/evaluation-cases.md) when validating this skill or preparing a release.
+
+## Research operating contract
+
+Define the requested security/universe, horizon and benchmark; state unspecified or not
+applicable rather than inventing them. Validate observation dates, units, financial periods,
+coverage and conflicting sources before combining evidence. Show formulas, input lineage and
+explicit assumptions for calculations. Keep observations, inferred signals and scenarios separate.
+Return a conclusion with contrary evidence, unresolved questions and what would change the
+assessment. Save or monitor only when requested, through the existing authorization and
+confirmation controls; a research request does not authorize persistent changes.
+
+## Statement coverage and competing cash needs
+
+Supplement proxy payout metrics with `fintel.get_security_financial_statement` for comparable
+income, cash_flow and balance periods when available. Inspect payout component methodology:
+DPS × current shares is a proxy, not actual cash dividends paid during that fiscal period.
+For actual-period cash payout, use statement dividends paid, operating cash and positive capex
+spending only when returned and compatible: FCF = operating cash − capex; cash payout = common
+cash dividends / FCF for positive FCF. Show source rows and units. Do not substitute financing
+outflows for dividends or count special dividends as recurring requirements. Examine supported
+debt service, buybacks and liquidity obligations; absent maturity schedules remain unknown.
+If comparable statements are unavailable, label the result a limited proxy review and withhold a
+complete dividend-coverage conclusion. Negative/zero denominators cannot support reassuring ratios.

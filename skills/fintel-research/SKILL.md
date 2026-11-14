@@ -7,6 +7,11 @@ description: Answer focused stock, fund, financial-data or Fintel account questi
 
 General workflow for focused Fintel questions. Prefer dedicated skills for discovery, thesis, reported earnings, bull/bear, catalysts, watchlist triage, claim audits and scenarios. Fifteen specialists cover short squeezes, insider signals, dividend sustainability, institutional positioning, options positioning, biotech due diligence, cash runway/dilution, valuation expectations, screen design and execution, earnings previews, earnings quality, analyst expectations, fund holdings, public manager portfolios and intraday technical analysis. Use those for a full assessment rather than assembling an incomplete generic response.
 
+Route full company briefs to `fintel-company-briefing`, curated comparable-company questions to
+`fintel-peer-comparison`, flagged-trade investigations to `fintel-unusual-options-investigation`
+and consolidated list developments to `fintel-watchlist-briefing`. Options market briefings use
+`fintel-options-positioning-review`; reverse valuation uses `fintel-valuation-expectations`.
+
 ## Workflow
 
 1. For a universe screen, use `fintel-screen-builder` starting with `fintel.get_screening_capabilities`; no individual listing lookup is needed. For company/fund research, resolve the security with `fintel.search_securities` (or `fintel.get_security` /
