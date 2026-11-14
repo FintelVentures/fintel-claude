@@ -5,11 +5,11 @@ description: Answer focused stock, fund, financial-data or Fintel account questi
 
 # Fintel research
 
-General workflow for focused Fintel questions. Prefer dedicated skills for discovery, thesis, reported earnings, bull/bear, catalysts, watchlist triage, claim audits and scenarios. Fourteen specialists cover short squeezes, insider signals, dividend sustainability, institutional positioning, options positioning, biotech due diligence, cash runway/dilution, valuation expectations, screen design, earnings previews, earnings quality, analyst expectations, fund holdings and public manager portfolios. Use those for a full assessment rather than assembling an incomplete generic response.
+General workflow for focused Fintel questions. Prefer dedicated skills for discovery, thesis, reported earnings, bull/bear, catalysts, watchlist triage, claim audits and scenarios. Fourteen specialists cover short squeezes, insider signals, dividend sustainability, institutional positioning, options positioning, biotech due diligence, cash runway/dilution, valuation expectations, screen design and execution, earnings previews, earnings quality, analyst expectations, fund holdings and public manager portfolios. Use those for a full assessment rather than assembling an incomplete generic response.
 
 ## Workflow
 
-1. Resolve the security with `fintel.search_securities` (or `fintel.get_security` /
+1. For a universe screen, use `fintel-screen-builder` starting with `fintel.get_screening_capabilities`; no individual listing lookup is needed. For company/fund research, resolve the security with `fintel.search_securities` (or `fintel.get_security` /
    `fintel.lookup_identifier` for an exact identifier). Ask if the match is ambiguous.
 2. Discover what is available from the connector's tool list; the catalog grows, so do not assume a
    fixed set. Pick the fewest tools that answer the question.
@@ -29,7 +29,8 @@ General workflow for focused Fintel questions. Prefer dedicated skills for disco
 - Biotech: `fintel.get_security_biotech_catalysts`, then `fintel.get_biotech_catalyst` using a returned published ID for detail. Empty coverage is not an invented pipeline.
 - Peers: `fintel.get_security_peers`, `fintel.get_security_peer_analysis` for the curated set and comparison provenance.
 - Rankings: `fintel.get_security_rankings`, `fintel.list_leaderboards`, `fintel.get_leaderboard`.
-- Definitions and individual metrics: `fintel.list_data_definitions`, `fintel.get_data_definition`, `fintel.get_security_data_point`. Use exact returned keys and units; criteria previews do not execute a screen.
+- Definitions and individual metrics: `fintel.list_data_definitions`, `fintel.get_data_definition`, `fintel.get_security_data_point`. Use exact returned keys and units.
+- Custom screens: `fintel.get_screening_capabilities`, `fintel.validate_screen`, `fintel.run_screen`, `fintel.get_screen_run`; use screen-builder for execution, owned saved-screen operations and historical replays. A criteria preview alone is unexecuted.
 - The user's account and lists: `fintel.get_account`, `fintel.list_stock_lists`, `fintel.get_stock_list`, `fintel.list_stock_list_items`. Restrict private reads to account-related requests.
 
 Filing-based data lags the period end. Keep report periods separate from filing and retrieval dates. Top-N excerpts cannot establish absent holdings or whole-portfolio overlap. Numeric values returned as normalized dollars do not need an additional historical thousands conversion.
@@ -48,6 +49,7 @@ Filing-based data lags the period end. Keep report periods separate from filing 
   the key assumption, and what would change it. Name the missing fact if evidence is incomplete.
   Do not refuse with boilerplate such as "I can't give recommendations".
 - Analysis is not authorization. Never create, change or delete anything in the user's Fintel
-  account (stock lists, alerts, notebooks, team content) without describing the change and getting
-  explicit confirmation first. Read-only lookups need none.
+  account (stock lists, alerts, notebooks, team content, saved screen definitions) without describing
+  the concrete change and obtaining explicit user intent. Read-only lookups need none. A request
+  to execute a screen or backtest authorizes its private expiring receipt; saving a definition is separate.
 - This is research support, not personalized investment advice.

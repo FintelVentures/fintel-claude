@@ -1,6 +1,6 @@
 ---
 name: fintel-stock-discovery
-description: Find research candidates from Fintel leaderboards and rankings, including squeeze candidates, yield leaders and market movers. Use for ranked shortlists; use screen-builder to design custom criteria and specialist assessments to investigate one returned stock.
+description: Find research candidates from Fintel leaderboards and rankings, including squeeze candidates, yield leaders and market movers. Use for ranked shortlists; use screen-builder to design and execute custom screens and specialist assessments to investigate one returned stock.
 ---
 
 # Stock discovery

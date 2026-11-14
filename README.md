@@ -8,12 +8,12 @@ account tools. The plugin bundles:
 
 ## Skills
 
-Version 0.2.0 bundles 23 portable skills: nine established workflows and fourteen specialist assessments. Each linked skill describes when to use it, its evidence tools, output and limitations. All tools require an authenticated MCP connection and the account's entitlements; inspect the live tool list before relying on a dependency. A package version does not prove that the matching server tools have been deployed.
+Version 0.2.1 bundles 23 portable skills: nine established workflows and fourteen specialist assessments. Each linked skill describes when to use it, its evidence tools, output and limitations. All tools require an authenticated MCP connection and the account's entitlements; inspect the live tool list before relying on a dependency. A package version does not prove that the matching server tools have been deployed.
 
 ### Established workflows
 
 - [`fintel-research`](skills/fintel-research/SKILL.md): Answer focused stock, fund, financial-data or Fintel account questions using the live MCP tool catalog. Use for lookups and general research when no specialist workflow fits; prefer specialist skills for a full assessment.
-- [`fintel-stock-discovery`](skills/fintel-stock-discovery/SKILL.md): Find research candidates from Fintel leaderboards and rankings, including squeeze candidates, yield leaders and market movers. Use for ranked shortlists; use screen-builder to design custom criteria and specialist assessments to investigate one returned stock.
+- [`fintel-stock-discovery`](skills/fintel-stock-discovery/SKILL.md): Find research candidates from Fintel leaderboards and rankings, including squeeze candidates, yield leaders and market movers. Use for ranked shortlists; use screen-builder to design and execute custom screens and specialist assessments to investigate one returned stock.
 - [`fintel-investment-thesis`](skills/fintel-investment-thesis/SKILL.md): Build a sourced investment thesis for one company with supporting and contradicting evidence, catalysts, risks, assumptions and invalidation conditions. Use for a deep dive or investment case rather than a narrow metric or specialist assessment.
 - [`fintel-earnings-review`](skills/fintel-earnings-review/SKILL.md): Review reported earnings results, actual versus estimated figures, supported period comparisons and open questions. Use after results; use earnings-preview before an announcement and earnings-quality-review for profit-to-cash analysis.
 - [`fintel-bull-bear`](skills/fintel-bull-bear/SKILL.md): Stress-test a stock thesis with the strongest supported bull and bear cases, shared assumptions, conflicting evidence and observations that would settle disagreements. Use when the user requests both sides or challenges an existing view.
@@ -35,16 +35,16 @@ Version 0.2.0 bundles 23 portable skills: nine established workflows and fourtee
 - [`fintel-institutional-positioning`](skills/fintel-institutional-positioning/SKILL.md): Assess disclosed institutional accumulation, distribution, concentration and reporting lag for one stock. Use to interpret positioning rather than just list holders or examine one manager's portfolio.
 - [`fintel-manager-portfolio-review`](skills/fintel-manager-portfolio-review/SKILL.md): Compare one investment manager's latest two disclosed 13F portfolios using amendment-aware changes and concentration evidence. Use for a public manager portfolio; this does not read the user's private portfolio or establish current trades or performance.
 - [`fintel-options-positioning-review`](skills/fintel-options-positioning-review/SKILL.md): Reconcile one stock's options flow, expiration positioning, implied volatility and gamma evidence. Use for options positioning around an event rather than one metric, a leaderboard or an execution strategy.
-- [`fintel-screen-builder`](skills/fintel-screen-builder/SKILL.md): Translate stock-screening objectives into reviewable criteria using Fintel's exact metric definitions and units. Use to design a screen; this does not execute, save or schedule it or return matched securities.
+- [`fintel-screen-builder`](skills/fintel-screen-builder/SKILL.md): Design, validate and execute custom stock screens with Fintel Workbench. Use for compound filters, formulas, rankings, historical screening, backtests and user-requested saved screens; use stock-discovery for existing leaderboard shortlists.
 - [`fintel-short-squeeze-assessment`](skills/fintel-short-squeeze-assessment/SKILL.md): Assess whether one named stock has a supported short-squeeze setup using short interest, borrowing conditions and price/volume evidence. Use for squeeze due diligence rather than a candidate leaderboard or a single short-interest lookup.
 - [`fintel-valuation-expectations`](skills/fintel-valuation-expectations/SKILL.md): Calculate revenue growth implied by a stock's valuation under explicit terminal-multiple, horizon and discount assumptions. Use for reverse valuation rather than a price target or a full DCF.
 
 ### Evidence and capability boundaries
 
-- Resolve security listings for company or fund analysis; public manager research instead resolves an identity with `fintel.search_managers`. Screen design starts with metric definitions. Ambiguity requires clarification.
+- Resolve security listings for company or fund analysis; public manager research instead resolves an identity with `fintel.search_managers`. Screening starts with `fintel.get_screening_capabilities`, followed by metric definitions and validation. Ambiguity requires clarification.
 - Required data failures and denied entitlements are coverage gaps. Empty successful datasets do not justify positive or negative signals. Preserve financial periods, observation dates, currency, units and truncation metadata, and cite material facts.
-- Public specialist assessments use read-only research tools. Watchlist triage reads the signed-in user's selected lists. Account changes require explicit authorization; research does not imply a trade, saved screen or alert.
-- Screen builder produces dictionary-backed criteria only. Manager comparisons and fund holdings are delayed disclosures, not current trades or complete live portfolios. Scenarios use explicit assumptions and do not promise returns or event probabilities.
+- Company specialist assessments use read-only research tools. Custom screen execution creates a private expiring receipt. Watchlist triage reads the signed-in user's selected lists. Account changes require explicit authorization; research does not imply a trade, saved screen or alert.
+- Screen builder validates and executes custom programs, polls/pages results, and supports user-requested saved screens and historical replay when the live tools are deployed. Execution does not save a definition. Manager comparisons and fund holdings are delayed disclosures, not current trades or complete live portfolios. Scenarios use explicit assumptions and do not promise returns or event probabilities.
 - The general research skill maps the current tool families. Prefer a specialist for a full assessment, a simple lookup for a single figure, and stock discovery for an existing ranked shortlist.
 
 The fourteen specialists correspond to the versioned contracts documented in `fintel-web/docs/Agentic-Message-Board-MCP-Plan.md`. Their adjacent evaluation cases cover sparse data and misleading interpretations. Packaging validation is separate from live-model evaluation of factual support, citations, freshness, entitlements and latency. These portable instructions do not enforce the server-side Fintel agent's deterministic evidence gates; Claude executes the workflow through the authenticated MCP tools.
@@ -91,3 +91,5 @@ Email help@fintel.io - https://fintel.io - Terms: https://fintel.io/terms - Priv
 ## License
 
 MIT, see `LICENSE`.
+
+Screening instructions in 0.2.1 are synchronized with the OpenAI package 0.2.4. Deploy the matching API/common/jobs/web screening implementation, refresh the host catalog and verify authenticated execution; source/package validation does not establish a live-host pass.
