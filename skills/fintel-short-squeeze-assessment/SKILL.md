@@ -13,6 +13,8 @@ Contract: `short_squeeze_assessment` / `short-squeeze-assessment-v1`.
 
 Call `fintel.get_short_interest`, `fintel.get_borrow_rate` and `fintel.get_price_bars` using their advertised bounded-history arguments. Compare reported short shares, days to cover, borrow cost and available inventory against dated price and volume observations. Short float requires a compatible sourced float denominator. Optional `fintel.get_short_volume` and `fintel.get_fails_to_deliver` provide distinct evidence, not substitutes for short interest.
 
+For requested intraday technical context, use the technical-analysis workflow and its supported tools when available. Keep sampled IEX volume separate from consolidated daily volume, preserve adjustment differences and report lending measurements separately. Historical signal testing is not available in that workflow.
+
 Lead with a provisional assessment, then positioning, counterevidence, catalysts, invalidation conditions and coverage. Keep settlement dates separate from quote timestamps. Borrow inventory is provider-specific, not total lending supply. Short-sale volume is not outstanding short interest; FTDs do not establish illegal activity or a forced-buy date. High short interest alone does not establish squeeze probability or timing.
 
 Example: “Can ABC sustain a short squeeze?”

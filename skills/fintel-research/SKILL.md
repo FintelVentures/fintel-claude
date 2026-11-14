@@ -5,7 +5,7 @@ description: Answer focused stock, fund, financial-data or Fintel account questi
 
 # Fintel research
 
-General workflow for focused Fintel questions. Prefer dedicated skills for discovery, thesis, reported earnings, bull/bear, catalysts, watchlist triage, claim audits and scenarios. Fourteen specialists cover short squeezes, insider signals, dividend sustainability, institutional positioning, options positioning, biotech due diligence, cash runway/dilution, valuation expectations, screen design and execution, earnings previews, earnings quality, analyst expectations, fund holdings and public manager portfolios. Use those for a full assessment rather than assembling an incomplete generic response.
+General workflow for focused Fintel questions. Prefer dedicated skills for discovery, thesis, reported earnings, bull/bear, catalysts, watchlist triage, claim audits and scenarios. Fifteen specialists cover short squeezes, insider signals, dividend sustainability, institutional positioning, options positioning, biotech due diligence, cash runway/dilution, valuation expectations, screen design and execution, earnings previews, earnings quality, analyst expectations, fund holdings, public manager portfolios and intraday technical analysis. Use those for a full assessment rather than assembling an incomplete generic response.
 
 ## Workflow
 
@@ -18,7 +18,7 @@ General workflow for focused Fintel questions. Prefer dedicated skills for disco
 ## Tool map (verify against the live tool list)
 
 - Identity: `fintel.search_securities`, `fintel.get_security`, `fintel.lookup_identifier`. For managers use `fintel.search_managers`, then the returned `managerId` with `fintel.get_manager_portfolio_changes`.
-- Prices: `fintel.get_last_price`, `fintel.get_price_bars`.
+- Prices: `fintel.get_last_price`, `fintel.get_price_bars`, `fintel.get_intraday_bars` (sampled IEX volume). Prefer the technical-analysis skill for session VWAP, compatible benchmark comparisons and setup limitations; historical signal testing is deferred.
 - Disclosed stock ownership: `fintel.get_security_owners` for a bounded page and `fintel.get_security_ownership_activity` for population totals. Fund composition: `fintel.get_fund_holdings_snapshot` for native NPORT holdings, allocations and flows.
 - Insiders: `fintel.get_security_insiders`. Classifications, filing dates and trade dates matter; omitted plan information remains unknown.
 - Short selling: `fintel.get_short_interest`, `fintel.get_short_volume`, `fintel.get_borrow_rate`, `fintel.get_fails_to_deliver`. Short-sale volume and FTDs cannot substitute for short interest.

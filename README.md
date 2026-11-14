@@ -8,7 +8,7 @@ account tools. The plugin bundles:
 
 ## Skills
 
-Version 0.2.1 bundles 23 portable skills: nine established workflows and fourteen specialist assessments. Each linked skill describes when to use it, its evidence tools, output and limitations. All tools require an authenticated MCP connection and the account's entitlements; inspect the live tool list before relying on a dependency. A package version does not prove that the matching server tools have been deployed.
+Version 0.2.2 bundles 24 portable skills: nine established workflows and fifteen specialist assessments. Each linked skill describes when to use it, its evidence tools, output and limitations. All tools require an authenticated MCP connection and the account's entitlements; inspect the live tool list before relying on a dependency. A package version does not prove that the matching server tools have been deployed.
 
 ### Established workflows
 
@@ -39,6 +39,8 @@ Version 0.2.1 bundles 23 portable skills: nine established workflows and fourtee
 - [`fintel-short-squeeze-assessment`](skills/fintel-short-squeeze-assessment/SKILL.md): Assess whether one named stock has a supported short-squeeze setup using short interest, borrowing conditions and price/volume evidence. Use for squeeze due diligence rather than a candidate leaderboard or a single short-interest lookup.
 - [`fintel-valuation-expectations`](skills/fintel-valuation-expectations/SKILL.md): Calculate revenue growth implied by a stock's valuation under explicit terminal-multiple, horizon and discount assumptions. Use for reverse valuation rather than a price target or a full DCF.
 
+- [`fintel-technical-analysis`](skills/fintel-technical-analysis/SKILL.md): Describe intraday OHLCV, session VWAP and compatible benchmark comparisons. IEX volume is sampled; historical signal testing is deferred.
+
 ### Evidence and capability boundaries
 
 - Resolve security listings for company or fund analysis; public manager research instead resolves an identity with `fintel.search_managers`. Screening starts with `fintel.get_screening_capabilities`, followed by metric definitions and validation. Ambiguity requires clarification.
@@ -47,7 +49,7 @@ Version 0.2.1 bundles 23 portable skills: nine established workflows and fourtee
 - Screen builder validates and executes custom programs, polls/pages results, and supports user-requested saved screens and historical replay when the live tools are deployed. Execution does not save a definition. Manager comparisons and fund holdings are delayed disclosures, not current trades or complete live portfolios. Scenarios use explicit assumptions and do not promise returns or event probabilities.
 - The general research skill maps the current tool families. Prefer a specialist for a full assessment, a simple lookup for a single figure, and stock discovery for an existing ranked shortlist.
 
-The fourteen specialists correspond to the versioned contracts documented in `fintel-web/docs/Agentic-Message-Board-MCP-Plan.md`. Their adjacent evaluation cases cover sparse data and misleading interpretations. Packaging validation is separate from live-model evaluation of factual support, citations, freshness, entitlements and latency. These portable instructions do not enforce the server-side Fintel agent's deterministic evidence gates; Claude executes the workflow through the authenticated MCP tools.
+Fourteen existing specialists correspond to the versioned contracts documented in `fintel-web/docs/Agentic-Message-Board-MCP-Plan.md`. The technical-analysis workflow is portable and does not add a separate server-side agent contract. Their adjacent evaluation cases cover sparse data and misleading interpretations. Packaging validation is separate from live-model evaluation of factual support, citations, freshness, entitlements and latency. These portable instructions do not enforce the server-side Fintel agent's deterministic evidence gates; Claude executes the workflow through the authenticated MCP tools.
 
 The package does not yet include dedicated filing-delta, peer-comparison, private-portfolio-exposure, thread-synthesis, watchlist-review/curation/building or profile-building skills. Some underlying tools are available; absence of a portable skill is not evidence that its tools are unavailable. No macro-outlook skill is included because the implemented workflows do not establish adequate macroeconomic data coverage.
 
