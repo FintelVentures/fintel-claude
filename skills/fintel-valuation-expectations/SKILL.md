@@ -19,6 +19,16 @@ Required workflow (do not skip these steps even if you can reproduce the arithme
 4. If revenue has no supported annual/TTM basis, currencies/scales cannot be aligned, or a material valuation discrepancy remains unresolved, stop with an insufficient-evidence explanation and the specific missing observations. Do not lead with numerical implied growth and bury the issue in a qualification. If the market observation date is unverified, do not call the result a current valuation. Offer an explicitly hypothetical calculation only as a separate user choice, with accepted inputs.
 5. For supported inputs, call `fintel.calculate_research_scenario` with `kind=reverse_valuation`, `currency`, `enterpriseValue`, `revenue`, `terminalRevenueMultiple`, integer `years` (1..30) and fractional `discountRate` (0..1). Call it separately for each requested sensitivity case. Use the returned required terminal revenue and CAGR, not standalone mental arithmetic. If the calculator is unavailable, report the gap instead of presenting a completed workflow. Years, discount and multiple are explicit user assumptions or clearly labeled illustrative assumptions. Negative EV or nonpositive revenue is outside the domain.
 
+When the user asks for an observed risk-free input, discover the appropriate series with
+`fintel.list_macro_series` and inspect `fintel.get_macro_series` before reading
+`fintel.get_macro_observations` with source and series_id (for example fred / DGS10). Use the actual
+observation date and returned native percent / rate_decimal units; match currency, tenor and
+nominal/real basis. An end_date is an economic-date cutoff over latest retained revisions, not a
+historical public-knowledge vintage. Respect missing cells and collection/freshness warnings, and
+cite the original source and FRED. A Treasury yield is one risk-free proxy, not the calculator's
+full discountRate or WACC. Keep ERP, beta, debt cost, tax, capital weights and all DCF cash-flow /
+terminal assumptions explicit; do not silently replace the accepted discount assumption.
+
 Show a compact input table with value, currency/scale, source, effective/observation date and revenue period basis/end. Distinguish the retrieval date from the observation dates. Cite the statement and calculator results as well as valuation metrics so the reader can verify that the required workflow ran.
 
 Explain inputs, implied expectations, sensitivity, sourced comparison, limitations and coverage. The model discounts terminal revenue-multiple value only and excludes interim cash flows, margins and future dilution. It is not a full DCF, fair-value estimate or unique market forecast. Do not invent numerical effects for excluded factors.

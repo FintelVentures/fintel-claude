@@ -1,6 +1,6 @@
 ---
 name: fintel-research
-description: Answer focused stock, fund, financial-data or Fintel account questions using the live MCP tool catalog. Use for lookups and general research when no specialist workflow fits; prefer specialist skills for a full assessment.
+description: Answer focused stock, fund, macroeconomic, interest-rate, financial-data or Fintel account questions using the live MCP tool catalog. Use for lookups and general research when no specialist workflow fits; prefer specialist skills for a full assessment.
 ---
 
 # Fintel research
@@ -14,7 +14,7 @@ and consolidated list developments to `fintel-watchlist-briefing`. Options marke
 
 ## Workflow
 
-1. For a universe screen, use `fintel-screen-builder` starting with `fintel.get_screening_capabilities`; no individual listing lookup is needed. For company/fund research, resolve the security with `fintel.search_securities` (or `fintel.get_security` /
+1. For macroeconomic series, start with `fintel.list_macro_series`; no security lookup is needed. Inspect metadata and coverage with `fintel.get_macro_series`, then use `fintel.get_macro_observations` for latest or historical values. Read [macro interpretation](references/macro-series.md) for rate selection, units and economic-date limitations. For a universe screen, use `fintel-screen-builder` starting with `fintel.get_screening_capabilities`; no individual listing lookup is needed. For company/fund research, resolve the security with `fintel.search_securities` (or `fintel.get_security` /
    `fintel.lookup_identifier` for an exact identifier). Ask if the match is ambiguous.
 2. Discover what is available from the connector's tool list; the catalog grows, so do not assume a
    fixed set. Pick the fewest tools that answer the question.
@@ -58,3 +58,6 @@ Filing-based data lags the period end. Keep report periods separate from filing 
   the concrete change and obtaining explicit user intent. Read-only lookups need none. A request
   to execute a screen or backtest authorizes its private expiring receipt; saving a definition is separate.
 - This is research support, not personalized investment advice.
+
+For macro questions, retain the provider citation/source link, economic date, retrieval time and
+collection/observation freshness warnings. Do not treat an economic date as a historical knowledge cutoff.

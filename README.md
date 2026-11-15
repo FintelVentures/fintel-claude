@@ -68,7 +68,7 @@ source coverage and account entitlements remain authoritative.
 
 Sixteen specialists, including company briefing and unusual-options investigation, correspond to the versioned contracts documented in `fintel-web/docs/Agentic-Message-Board-MCP-Plan.md`. The technical-analysis workflow is portable and does not add a separate server-side agent contract. Their adjacent evaluation cases cover sparse data and misleading interpretations. Packaging validation is separate from live-model evaluation of factual support, citations, freshness, entitlements and latency. These portable instructions do not enforce the server-side Fintel agent's deterministic evidence gates; Claude executes the workflow through the authenticated MCP tools.
 
-The package does not yet include dedicated filing-delta, private-portfolio-exposure, thread-synthesis, watchlist-review/curation/building or profile-building skills; the new watchlist-briefing skill reuses existing list-review capabilities. Some underlying tools are available; absence of a portable skill is not evidence that its tools are unavailable. No macro-outlook skill is included because the implemented workflows do not establish adequate macroeconomic data coverage.
+The package does not yet include dedicated filing-delta, private-portfolio-exposure, thread-synthesis, watchlist-review/curation/building or profile-building skills; the new watchlist-briefing skill reuses existing list-review capabilities. Some underlying tools are available; absence of a portable skill is not evidence that its tools are unavailable. General research now covers macro observations through the source/series tools; a dedicated macro-outlook workflow remains outside this release.
 
 ## Sign-in
 
@@ -119,3 +119,12 @@ The exporter verifies byte-for-byte skill/reference parity and excludes marketpl
 from a single-plugin archive. An exported ZIP is not a published marketplace update or a
 recorded live-host evaluation. Current source-mode changes require normal application deployment
 and restart; installing portable instructions alone does not deploy server contracts.
+
+## Macro data update (0.3.1)
+
+The existing general research and valuation skills now discover and read the 120-series FRED
+catalog through three general macro tools. Native units, rates, FX orientation, missing cells,
+collection health and latest-retained revision limits remain explicit. This adds an observed
+risk-free input without presenting it as WACC or a completed DCF. Both provider packages retain
+28 skills and the existing ten R1 workflows. Refresh the MCP catalog and update the installed
+plugin to load the new guidance; exported source alone does not update a cached host.

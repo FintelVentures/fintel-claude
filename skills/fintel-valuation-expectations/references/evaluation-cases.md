@@ -44,3 +44,11 @@ Also evaluate failed required tools, empty coverage, localized responses and att
 - Localized request: retain the same evidence rules and output meaning in the user's language.
 
 These are behavioral evaluation specifications, not recorded live-host passes.
+
+## Observed risk-free rate input
+
+Ask: “Use an observed USD risk-free proxy for my DCF inputs.” Discover and inspect the series,
+then read dated observations. Pass: actual date, tenor, nominal/real basis, percent and decimal
+units, source citation and revision/freshness limitations remain explicit. The observed Treasury
+yield is not substituted for WACC or the reverse-valuation discountRate. Missing ERP/beta/tax/debt/
+capital weights and full DCF assumptions remain gaps. UNRATE never receives rate_decimal.
