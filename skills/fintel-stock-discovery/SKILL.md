@@ -13,9 +13,14 @@ Present Fintel leaderboards and rankings as research shortlists, not recommendat
    general ranking (short squeeze, dividend yield, market cap, short interest, volume, gainers,
    losers) open that board directly with `fintel.get_leaderboard` or its dedicated tool such as
    `fintel.get_short_squeeze_leaderboard`. Otherwise propose the best-fit board and ask.
-2. Return the entries with rank, ticker, the Fintel `name`, and the ranking value, plus the board's
-   as-of date and universe.
-3. Do not enrich every row. After presenting the board, ask which returned security merits deeper
+2. Check the selected board's catalog entry for supported filters before requesting a shortlist.
+   Filter support differs by board; do not assume country, exchange, market-cap or other filters
+   apply everywhere. If a requested filter is unsupported, say so and use a validated custom
+   screen when needed. Never describe a truncated board filtered locally as the full ranking.
+3. Return the entries with rank, ticker, the Fintel `name`, and the ranking value, plus the board's
+   as-of date and universe. Preserve population size; a withheld percentile or a small population
+   does not support a meaningful market-wide percentile comparison.
+4. Do not enrich every row. After presenting the board, ask which returned security merits deeper
    research. A reply such as a ticker, a company name or "the second one" selects it.
 
 If the user wants private picks tailored to them, first confirm their goals and constraints
