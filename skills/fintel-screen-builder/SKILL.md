@@ -9,7 +9,7 @@ Use Fintel's authenticated MCP connector and inspect the live tool catalog and e
 
 Required evidence failures must remain explicit coverage gaps. Preserve returned units, currencies, missing values, dates and warnings. Cite material observations, distinguish facts from interpretation and assumptions, and write in the user's language. Do not replace missing Fintel observations with model memory.
 
-Contract: `screen_builder` / `screen-builder-v2` (portable MCP workflow; does not change any separate server-side agent contract).
+Contract: `screen_builder` / `screen-builder-v3` (portable MCP workflow; does not change any separate server-side agent contract).
 
 ## Design and validation
 
@@ -20,15 +20,15 @@ Contract: `screen_builder` / `screen-builder-v2` (portable MCP workflow; does no
 
 ## Execute and retrieve
 
-When the user asks for matching stocks or a count, execute the screen; the request authorizes an execution receipt. Call `fintel.run_screen` with exactly one of `program` or an owned `screenId`. This creates a private, expiring receipt and does not create a saved screen. Use an optional `requestKey` for retries of the same intent; do not reuse it for a changed program or parameters.
+When the user asks for matching stocks or a count, execute the screen. Call `fintel.run_screen` with exactly one of `program` or an owned `screenId`, plus optional `asOfDate`. The screen runs immediately in the serving JVM. This is one live call with no stored receipt, job queue or polling; do not supply a `requestKey` or call `get_screen_run` for a live screen. It does not create a saved screen.
 
-Read `structuredContent.data` (also serialized in the MCP text content). Pass returned `run_id` as `runId` to `fintel.get_screen_run`. Poll `queued`/`running` until `succeeded`, `failed` or `cancelled`; pending is not an empty result. Jobs run through the existing queue drain, so do not claim completion from a submission receipt.
+Read `structuredContent.data` (also serialized in the MCP text content). The final successful result contains all rows and `total_rows`, with `partial=false`. Streamable HTTP hosts may request `params._meta.progressToken` and receive partial batch notifications in `params._meta["io.fintel/screening"]`; host support determines whether those updates reach the AI. Do not promise universal early result visibility. A preview is incomplete until the final call succeeds. The final rows replace any accumulated preview; do not append them twice.
 
-Only `succeeded` establishes matches. Follow `next_offset` as `offset` with the same `runId` until null when complete coverage is needed. The page `limit` is separate from the program's DSL `limit`. `total_rows` counts the program's output after its DSL limit; a top-25 result cannot establish an unrestricted population count. For a full count, execute a program without that DSL limit, subject to server bounds.
+`total_rows` counts output after the program's DSL `limit`; a top-25 result cannot establish an unrestricted population count. For a full count, execute a program without that DSL limit, subject to server bounds.
 
 Report returned country/symbol/name identities, selected values, program, evaluation anchor and execution time, with units and coverage. `retrieved_at` is execution time; per-value observation/publication dates remain unknown. Missing comparisons are false and null is unavailable, never zero. Historical screening uses the current listing universe and does not guarantee historical constituents or publication-time availability. An unordered limit does not establish a ranked top-N.
 
-Failed/cancelled runs publish no partial results. Inspect `error_code`: refine filters or add a disclosed DSL limit for `result_limit_exceeded`; explain provider/evaluation failures as unavailable evidence. Expired receipts need a new run/key. Use `fintel.cancel_screen_run` when the user asks to stop a pending run.
+A failed, cancelled or disconnected call invalidates earlier partial rows as a completed answer. Inspect returned execution errors: refine filters or add a disclosed DSL limit for `result_limit_exceeded`; explain provider/evaluation failures as unavailable evidence. The host can close the active stream to stop a live screen. There is no reconnect/resume receipt; a fresh call starts a new evaluation.
 
 ## Saved screens and history
 
