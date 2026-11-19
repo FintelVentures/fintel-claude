@@ -8,7 +8,7 @@ account tools. The plugin bundles:
 
 ## Skills
 
-Version 0.3.0 bundles 28 portable skills, including all ten R1 investment-question outcomes. Each linked skill describes when to use it, its evidence tools, output and limitations. All tools require an authenticated MCP connection and the account's entitlements; inspect the live tool list before relying on a dependency. A package version does not prove that the matching server tools have been deployed.
+Version 0.3.2 bundles 28 portable skills, including all ten R1 investment-question outcomes. Each linked skill describes when to use it, its evidence tools, output and limitations. All tools require an authenticated MCP connection and the account's entitlements; inspect the live tool list before relying on a dependency. A package version does not prove that the matching server tools have been deployed.
 
 ### Established workflows
 
@@ -24,7 +24,7 @@ Version 0.3.0 bundles 28 portable skills, including all ten R1 investment-questi
 
 ### Specialist assessments
 
-- [`fintel-analyst-expectations-review`](skills/fintel-analyst-expectations-review/SKILL.md): Reconcile analyst price targets, rating distributions, fiscal-period forecasts and estimate dispersion for one stock. Use for consensus and disagreement analysis; this surface cannot establish historical earnings-estimate revisions without comparable snapshots.
+- [`fintel-analyst-expectations-review`](skills/fintel-analyst-expectations-review/SKILL.md): Reconcile analyst price targets, rating distributions, fiscal-period forecasts and estimate dispersion for one stock. Use for consensus and disagreement analysis; use retained history and fiscal-target revision tools for supported estimate-change questions.
 - [`fintel-biotech-event-due-diligence`](skills/fintel-biotech-event-due-diligence/SKILL.md): Assess trial evidence, success conditions and risks for a published biotech catalyst. Use for event due diligence rather than a calendar lookup, an invented pipeline or individual medical advice.
 - [`fintel-dilution-and-runway`](skills/fintel-dilution-and-runway/SKILL.md): Assess cash runway, funding needs and possible dilution before company milestones using dated financial statements and explicit burn scenarios. Use for liquidity research rather than a generic cash balance lookup.
 - [`fintel-dividend-sustainability`](skills/fintel-dividend-sustainability/SKILL.md): Assess whether a company can support its dividend using payment history, payout coverage and leverage. Use for dividend safety or cut-risk research rather than yield rankings or ex-dividend dates.
@@ -62,8 +62,8 @@ source coverage and account entitlements remain authoritative.
 
 - Resolve security listings for company or fund analysis; public manager research instead resolves an identity with `fintel.search_managers`. Screening starts with `fintel.get_screening_capabilities`, followed by metric definitions and validation. Ambiguity requires clarification.
 - Required data failures and denied entitlements are coverage gaps. Empty successful datasets do not justify positive or negative signals. Preserve financial periods, observation dates, currency, units and truncation metadata, and cite material facts.
-- Company specialist assessments use read-only research tools. Custom screen execution creates a private expiring receipt. Watchlist triage reads the signed-in user's selected lists. Account changes require explicit authorization; research does not imply a trade, saved screen or alert.
-- Screen builder validates and executes custom programs, polls/pages results, and supports user-requested saved screens and historical replay when the live tools are deployed. Execution does not save a definition. Manager comparisons and fund holdings are delayed disclosures, not current trades or complete live portfolios. Scenarios use explicit assumptions and do not promise returns or event probabilities.
+- Company specialist assessments use read-only research tools. Live custom screens return rows in the same call without stored receipts; historical backtests create private receipts. Watchlist triage reads the signed-in user's selected lists. Account changes require explicit authorization; research does not imply a trade, saved screen or alert.
+- Screen builder validates and executes live custom programs without polling, polls/pages historical backtest receipts, and supports user-requested saved screens and historical replay when the live tools are deployed. Execution does not save a definition. Manager comparisons and fund holdings are delayed disclosures, not current trades or complete live portfolios. Scenarios use explicit assumptions and do not promise returns or event probabilities.
 - The general research skill maps the current tool families. Prefer a specialist for a full assessment, a simple lookup for a single figure, and stock discovery for an existing ranked shortlist.
 
 Sixteen specialists, including company briefing and unusual-options investigation, correspond to the versioned contracts documented in `fintel-web/docs/Agentic-Message-Board-MCP-Plan.md`. The technical-analysis workflow is portable and does not add a separate server-side agent contract. Their adjacent evaluation cases cover sparse data and misleading interpretations. Packaging validation is separate from live-model evaluation of factual support, citations, freshness, entitlements and latency. These portable instructions do not enforce the server-side Fintel agent's deterministic evidence gates; Claude executes the workflow through the authenticated MCP tools.
@@ -128,3 +128,21 @@ collection health and latest-retained revision limits remain explicit. This adds
 risk-free input without presenting it as WACC or a completed DCF. Both provider packages retain
 28 skills and the existing ten R1 workflows. Refresh the MCP catalog and update the installed
 plugin to load the new guidance; exported source alone does not update a cached host.
+
+## API catalog alignment (0.3.2)
+
+The 28 existing workflows now cover retained analyst revisions and US fiscal-target windows/rankings,
+country market breadth and technical coverage, canonical sectors/classifications, explicit SEC
+annual/quarterly/TTM statements and ratios, unmapped SEC facts, retained research-change feeds,
+private saved thesis/evidence checks, Damodaran country risk inputs and explicit-assumption DCF.
+General research links focused references for financial/price evidence, breadth/classifications and
+private research. Specialist guidance preserves valuation-date peer FX, retained market-cap baseline
+dates, earnings reconciliation and live-screen versus historical-receipt behavior. Missing or
+withheld evidence stays unavailable; private research remains private and writes require exact
+content approval. Billing recovery uses website links, with no billing MCP tools.
+
+This is source guidance aligned with API contracts reviewed on 2026-11-19, not a live-host acceptance
+result. Both provider manifests and the workflow release are 0.3.2; skill/reference files remain
+byte-identical. Install the updated plugin and refresh the MCP catalog. Server changes require their
+normal deployment/restart; a package update or Git push does not deploy tools, populate collectors
+or publish a directory release. No connector URL, OAuth identity or account permission changes.

@@ -30,3 +30,9 @@ explicit assumptions for calculations. Keep observations, inferred signals and s
 Return a conclusion with contrary evidence, unresolved questions and what would change the
 assessment. Save or monitor only when requested, through the existing authorization and
 confirmation controls; a research request does not authorize persistent changes.
+
+When using `fintel.get_last_price`, distinguish retained trades from `is_eod_fallback`. EOD
+fallback has a closing date, not a trade timestamp; neither category proves live feed freshness.
+Use `last_eod_close_date` for daily-close comparisons and `previous_close_date` for the daily-change
+baseline. Preserve unknown session/freshness and missing range/volume; never combine a retained
+older trade with newer daily bars as if they were one observation.

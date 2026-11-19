@@ -43,3 +43,10 @@ If the user wants private picks tailored to them, first confirm their goals and 
   account (stock lists, alerts, notebooks, team content) without describing the change and getting
   explicit confirmation first. Read-only lookups need none.
 - This is research support, not personalized investment advice.
+
+For estimate-revision shortlists, use `fintel.get_estimate_revision_rankings` with live-supported
+metric/frequency/window/direction. Preserve the current US common/ADR company universe, exclusions,
+receipt endpoints and fiscal-target comparability; a ranking is not a continuous upgrade history.
+For sector universes discover `fintel.list_sectors` / `fintel.search_classifications`, then use the
+returned level/path with `fintel.list_classification_securities`. Taxonomy child counts are not
+company counts; retain assignment-review flags and imported/unmapped categories.

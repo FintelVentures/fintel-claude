@@ -45,3 +45,17 @@ Evaluation examples:
 - DEXUSEU: report USD per EUR with full returned precision.
 - Missing latest source cell: report unavailable with date; no automatic prior-value substitution.
 - History: follow next_args; reject changed-filter cursors and preserve inclusive economic bounds.
+
+## Damodaran country risk estimates
+
+The same tools support `source=damodaran`; specify it during discovery because the default remains
+FRED. Discover country/metric IDs rather than assuming ISO codes. Inspect available estimates for
+country risk premium, total equity risk premium, adjusted default spread, corporate tax rate,
+sovereign CDS and CDS-based ERP. Total ERP already includes CRP: adding CRP again double counts it.
+These percentage rates are not interest rates or calculated WACC. Preserve exact percent/decimal
+units, missing source cells, source update date, citation and collection health. Daily collection
+does not imply daily estimate updates, and retained revisions do not establish historical public
+knowledge. No catalog/observation until import means unavailable coverage.
+
+Evaluation: discover an Australian total ERP, preserve its actual source date, and do not add its
+CRP again or call it WACC.

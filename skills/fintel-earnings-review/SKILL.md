@@ -59,3 +59,9 @@ currency and accounting basis. Current forward consensus is not the pre-announce
 If expectations are unavailable, withhold a beat/miss calculation; percentage surprises require
 a positive nonzero expected denominator and visible inputs. Event-study benchmark differences
 are not beta-adjusted alpha or proof of earnings causality.
+
+Preserve reconciled earnings evidence and withheld fiscal identities. Current analyst estimates
+may attach an issuer period end only for an unambiguous fiscal match; source/provider dates remain
+separate. Missing or conflicting accounting basis cannot support a beat/miss. Use
+`fintel.get_security_earnings_event_study` when requested for event-aligned price evidence, retaining
+benchmark and timing limits; it does not prove earnings caused the move.

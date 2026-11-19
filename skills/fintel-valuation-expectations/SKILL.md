@@ -46,3 +46,18 @@ explicit assumptions for calculations. Keep observations, inferred signals and s
 Return a conclusion with contrary evidence, unresolved questions and what would change the
 assessment. Save or monitor only when requested, through the existing authorization and
 confirmation controls; a research request does not authorize persistent changes.
+
+For latest retained US filing evidence, request `source=sec` explicitly on
+`fintel.get_security_financial_statement`; the default provider source can lag filings. SEC supports
+annual/quarterly statements and TTM additive income/cash_flow, with per-metric filing and revision
+evidence. Do not sum balances, EPS or weighted shares, mix source cohorts, or fill withheld values
+from another source. Preserve fiscal periods, currencies and ratio units: margins are fractions,
+cash-dividend coverage is a multiple. Use only reconciled contiguous quarters for TTM; missing
+revision proof remains unavailable. Provider-typed standalone quarters do not need adjacent-quarter
+subtraction; unverified duration values in `reportedValues` cannot support quarter/runway calculations.
+
+Market-cap/EV evidence may retain an older baseline while new share/filing evidence is pending.
+Preserve `filing_provenance.availability_fallback` and the original effective date; do not call the
+baseline a newly verified quote. For a full DCF requested separately, discover the calculator's
+`discounted_cash_flow` schema and require explicit compatible FCFF forecasts, discount/terminal
+rates, claims and shares. A Treasury proxy or total ERP alone is not WACC.

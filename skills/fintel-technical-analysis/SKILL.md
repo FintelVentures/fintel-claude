@@ -26,3 +26,9 @@ Historical signal testing, win rates, transaction-cost simulations, market bread
 Example: “How is GME trading this session relative to its IEX VWAP and SPY, and do dated borrow observations show tightening?”
 
 Read [evaluation cases](references/evaluation-cases.md) when validating or releasing this workflow.
+
+When using `fintel.get_last_price`, distinguish retained trades from `is_eod_fallback`. EOD
+fallback has a closing date, not a trade timestamp; neither category proves live feed freshness.
+Use `last_eod_close_date` for daily-close comparisons and `previous_close_date` for the daily-change
+baseline. Preserve unknown session/freshness and missing range/volume; never combine a retained
+older trade with newer daily bars as if they were one observation.

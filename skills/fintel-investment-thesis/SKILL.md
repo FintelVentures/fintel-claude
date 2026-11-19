@@ -39,3 +39,11 @@ count small; omit optional sources that are irrelevant and say so.
   account (stock lists, alerts, notebooks, team content) without describing the change and getting
   explicit confirmation first. Read-only lookups need none.
 - This is research support, not personalized investment advice.
+
+When the user requests continuity with their private saved research, discover
+`fintel.get_research_context` after resolving the listing, then retrieve only relevant owned thesis
+versions. Separate saved beliefs from current evidence. `fintel.check_thesis_evidence` compares
+supported retained sources without refreshing or monitoring them; unchanged does not mean fresh.
+For requested saves/revisions, preview the exact complete snapshot and reason and obtain approval
+before `fintel.create_research_thesis` / `fintel.revise_research_thesis`. Follow the live version,
+approved and idempotency controls. Never read or publish private theses into a team/public context.

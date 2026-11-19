@@ -24,3 +24,6 @@
 - Localized request: retain the same evidence rules and output meaning in the user's language.
 
 These are behavioral evaluation specifications, not recorded live-host passes.
+
+- Situation: Display-currency FCF/cap differs from the returned FCF yield.
+  Expected behavior: Inspect valuation-date calculation FX and original inputs; do not overwrite the yield with display-value arithmetic.

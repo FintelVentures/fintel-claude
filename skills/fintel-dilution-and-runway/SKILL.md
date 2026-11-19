@@ -20,3 +20,12 @@ Explain liquidity, burn, runway, dilution, milestones and coverage. Distinguish 
 Example: “Can ABC fund operations through its next milestone without dilution?”
 
 Read [evaluation cases](references/evaluation-cases.md) when validating this skill or preparing a release.
+
+For latest retained US filing evidence, request `source=sec` explicitly on
+`fintel.get_security_financial_statement`; the default provider source can lag filings. SEC supports
+annual/quarterly statements and TTM additive income/cash_flow, with per-metric filing and revision
+evidence. Do not sum balances, EPS or weighted shares, mix source cohorts, or fill withheld values
+from another source. Preserve fiscal periods, currencies and ratio units: margins are fractions,
+cash-dividend coverage is a multiple. Use only reconciled contiguous quarters for TTM; missing
+revision proof remains unavailable. Provider-typed standalone quarters do not need adjacent-quarter
+subtraction; unverified duration values in `reportedValues` cannot support quarter/runway calculations.

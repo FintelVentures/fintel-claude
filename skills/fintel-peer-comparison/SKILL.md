@@ -36,3 +36,12 @@ assessment. Save or monitor only when requested, through the existing authorizat
 confirmation controls; a research request does not authorize persistent changes.
 
 Read [evaluation cases](references/evaluation-cases.md) when validating or releasing this workflow.
+
+For monetary comparisons preserve original values/currencies and dated direct or inverse FX
+evidence; missing, contradictory or invalid rates cannot be replaced with current FX. FCF yield
+uses verified matching LTM CFO/capex and a positive dated market cap, with FCF converted into cap
+currency at the cap valuation date. Preserve `original_value`, `original_currency`, `fx_rate`,
+`fx_rate_date` and `fx_valuation_date` from calculation inputs. Display FCF and cap can use their
+own observation-date FX, so dividing displayed values may not reproduce the returned yield.
+Do not override it with that quotient. Respect withheld stale/mixed price bases, unsupported
+non-US split-adjusted growth, missing currencies and source/period coverage.

@@ -46,3 +46,13 @@ assessment. Save or monitor only when requested, through the existing authorizat
 confirmation controls; a research request does not authorize persistent changes.
 
 Read [evaluation cases](references/evaluation-cases.md) when validating or releasing this workflow.
+
+For retained dated developments in a supplied resolved universe, use
+`fintel.get_securities_changes` (or `fintel.get_security_changes` for one listing), following live
+argument schemas and returned `meta.next_args`. Bounds are after `since` through `until`; overlapping
+rereads may reveal late arrivals. Filings, insider forms, analyst actions and estimate endpoint
+changes are distinct families with separate coverage. Estimate changes compare complete receipts
+for explicit fiscal targets; they do not enumerate intermediate revisions. Current requested list
+membership is not historical membership. Empty events do not establish unchanged conditions.
+For an explicitly requested personal list's revision ranking, discover its owned ID and use
+`fintel.get_watchlist_estimate_revision_rankings`; do not expose that membership in public/team work.

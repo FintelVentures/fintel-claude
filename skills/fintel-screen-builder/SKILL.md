@@ -36,8 +36,16 @@ For user-requested account work, use `fintel.list_screens` then `fintel.get_scre
 
 `fintel.get_screen_performance` reads stored scheduled history. `fintel.list_screen_backtests` and `fintel.get_screen_backtest` read existing saved web artifacts.
 
-For a requested new historical replay, validate then call `fintel.run_screen_backtest` with program XOR screenId, `startDate`, `endDate`, `interval` (`day`, `week`, `month`) and optional `requestKey`. Poll/page using the same run tools. Follow live date/evaluation limits. This is trade-membership replay with mean closed-trade return, not portfolio total return. It omits portfolio weights, cash, slippage, costs, dividend reinvestment and benchmark total returns; open positions are unmarked. Disclose current-universe and publication-time limitations before interpreting performance.
+For a requested new historical replay, validate then call `fintel.run_screen_backtest` with program XOR screenId, `startDate`, `endDate`, `interval` (`day`, `week`, `month`) and optional `requestKey`. Poll/page with `fintel.get_screen_run`; use returned `run_id` as `runId` and `next_offset` as `offset`. Follow live date/evaluation limits. This is trade-membership replay with mean closed-trade return, not portfolio total return. It omits portfolio weights, cash, slippage, costs, dividend reinvestment and benchmark total returns; open positions are unmarked. Disclose current-universe and publication-time limitations before interpreting performance.
 
 Examples: “Find US small caps trading below net assets”; “How many companies match these criteria?”; “Save this validated screen”; “Backtest this screen monthly over the last year.”
 
 Read [evaluation cases](references/evaluation-cases.md) when validating this skill or preparing a release.
+
+Preserve validation currency/unit diagnostics, not just syntax success. Do not combine incompatible
+monetary metrics or interpret fraction/whole-percent units from a name alone. Historical FX must
+use the returned dated evidence, not today's rate. For backtest receipts, read `run_id` as `runId`
+and page with returned `next_offset` as `offset` through terminal status and all result pages.
+`fintel.cancel_screen_run` is destructive for a historical receipt: it discards partial results
+and cannot resume the run. Explain that effect and require an explicit cancellation request;
+closing a live screen stream is a separate action.
