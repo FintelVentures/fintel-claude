@@ -32,7 +32,7 @@ A failed, cancelled or disconnected call invalidates earlier partial rows as a c
 
 ## Saved screens
 
-For user-requested account work, use `fintel.list_screens` then `fintel.get_screen` to obtain owned IDs and inspect definitions. `fintel.create_screen`, `fintel.update_screen` and `fintel.delete_screen` persist changes visible in Workbench; explain the concrete change and require explicit user intent. A request to find stocks does not authorize saving, replacing or deleting a definition. Updates replace the definition; omitted summary clears it. Deletion also removes related stored results/history/backtests.
+For user-requested account work, use `fintel.list_screens` then `fintel.get_screen` to obtain owned IDs and inspect definitions. `fintel.create_screen`, `fintel.update_screen` and `fintel.delete_screen` persist changes visible in Workbench; explain the concrete change and require explicit user intent. A request to find stocks does not authorize saving, replacing or deleting a definition. Updates replace the name and program. Omit the summary to preserve it or send null to clear it. Deletion also removes related stored results/history/backtests.
 
 Historical replay and backtest results are available through Workbench outside this MCP connection. If asked for a replay, explain the availability and label any proposed screening program as unexecuted.
 
