@@ -146,3 +146,25 @@ result. Both provider manifests and the workflow release are 0.3.2; skill/refere
 byte-identical. Install the updated plugin and refresh the MCP catalog. Server changes require their
 normal deployment/restart; a package update or Git push does not deploy tools, populate collectors
 or publish a directory release. No connector URL, OAuth identity or account permission changes.
+
+## Reviewer examples
+
+- **Fund holdings.** Call `fintel.get_fund_holdings_snapshot` with
+  `{"country":"US","symbol":"VTI","limit":3}` for an ETF or substitute `ABAEX` for a mutual
+  fund. Both returned holdings on the live MCP server on 23 November 2026. Coverage requires a
+  US listing classified as an ETF, mutual fund or ETN and a public, ingested native N-PORT filing.
+  The ticker must identify a unique SEC series through a resolved share class or an unambiguous
+  legacy owner. The store lacked Vanguard 500 Index series `S000002839` (VFIAX and VOO) on that date.
+  A fund can file with the SEC before its data becomes available here.
+- **Peer analysis.** Call `fintel.get_security_peer_analysis` with
+  `{"country":"US","symbol":"MSFT","detail":"compact"}`. If a curated group is unavailable,
+  `method=gics_industry_fallback` identifies the same-market software comparison group.
+- **Apple quarterly income.** Call `fintel.get_security_financial_statement` with
+  `{"country":"US","symbol":"AAPL","kind":"income","source":"sec","period":"quarterly","limit":1}`.
+  When the annual 10-K and nine-month 10-Q do not share revision evidence, look for the
+  fiscal Q4 estimates under `asFiledDifferences`. The estimates retain both filing accessions.
+- **Response detail.** Financial statements default to four periods. Set `include_evidence=true`
+  and a small `limit` for filing receipts. Earnings surprises default to eight observations and
+  premium sentiment to five completed sessions. Both accept `limit` or `include_history=true`
+  for the retained series. Set `include_detail=true` on expiration analysis for the entitled
+  intraday, strike and heatmap breakdowns. These defaults require the matching MCP server build.

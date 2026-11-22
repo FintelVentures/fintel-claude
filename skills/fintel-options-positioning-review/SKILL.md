@@ -11,7 +11,7 @@ Required evidence failures must remain explicit coverage gaps. Empty data does n
 
 Contract: `options_positioning_review` / `options-positioning-review-v1`.
 
-Call all four required tools: `fintel.get_security_options_flow_sentiment`, `fintel.get_security_options_sentiment_by_expiration`, `fintel.get_security_implied_volatility` and `fintel.get_security_gamma_exposure`. Optional expiration analysis, positioning walls or current range may add context when available. Preserve quote/session/expiration dates and distinguish live, completed-session and end-of-day records.
+Call all four required tools: `fintel.get_security_options_flow_sentiment`, `fintel.get_security_options_sentiment_by_expiration`, `fintel.get_security_implied_volatility` and `fintel.get_security_gamma_exposure`. Optional expiration analysis, positioning walls or current range may add context when available. Expiration analysis defaults to session and expiration-bucket totals. Request `include_detail=true` for entitled 0DTE intraday flow, strikes and the expiration heatmap. Preserve quote/session/expiration dates and distinguish live, completed-session and end-of-day records.
 
 Check coverage and timestamps first, then select optional positioning, flow or volatility detail according to the user's question. Explain flow, positioning, volatility, gamma, counterevidence and coverage, matching sessions before interpreting agreement or disagreement.
 
@@ -37,3 +37,7 @@ For an options briefing, summarize flow, positioning, volatility and expiry conc
 Preserve the required gamma read as explicitly modeled context. Relevant optional current/forecast
 ranges must retain construction, input/expiry dates and errors; timeout/unavailable is not a zero
 range or a neutral signal. Never present premium/IV ranges as probabilities or confidence intervals.
+
+For volatility questions, the IV summary includes `research.expirationSummary` (ATM IV, 25-delta put-minus-call skew and straddle-implied moves) and `research.termStructureShape`. Distinguish an inverted front pair from a mixed or fully backwardated curve. Use `include_detail=true` for contract inputs. For earnings questions, opt into `include_earnings=true` and bound prior reports with `earnings_limit` (1–40, default 8). Preserve missing reactions, sample counts and snapshot-relative event inclusion. The full-expiry straddle premium and historical first-session earnings reaction have different horizons; their comparison is descriptive context, not earnings-isolated variance, a forecast or a historical implied-versus-realized backtest. An unavailable optional earnings comparison is a coverage gap even when IV succeeds.
+
+Use gamma `exposure_analysis` for the spot-repriced flip, delta/vanna/calendar-time charm and quote-date 0DTE gamma. Keep provider gamma separate from model scenarios, call-long/put-short totals separate from all-options-long totals, and preserve model rates/dividends, timing assumptions and excluded-input coverage. A missing bounded scan crossing does not establish that no flip exists. For broad sentiment, use `fintel.get_market_options_context` and pair actual dates with `fintel.get_market_breadth` for US. Preserve market-universe gaps, SPY/QQQ ETF versus SPX cash-index distinctions, and the difference between the VIX/VIX3M index curve and monthly VX futures settlements.

@@ -3,12 +3,17 @@
 Use `fintel.get_security_financial_statement` for a resolved listing, selecting `kind=income`,
 `balance` or `cash_flow` and an explicit period. Default source is `capital_iq`; request
 `source=sec` for retained US filing evidence. Do not silently combine sources or fill withheld
-SEC metrics from another filing/provider. Prefer a small `limit` appropriate to the question.
+SEC metrics from another filing/provider. The tool defaults to four period summaries. Set
+`include_evidence=true` with a small `limit` when the question requires per-metric filing and
+derivation receipts.
 
 SEC supports annual/quarterly statements and TTM additive income/cash-flow projections. Inspect
 per-metric evidence, missing/conflicting lines, filing cohorts and revision reconciliation.
 Quarters follow observed fiscal boundaries; compatible YTD subtraction needs the returned
-same-filing proof. TTM needs four contiguous reconciled quarters: never sum balances, EPS or
+same-filing proof. When present, `asFiledDifferences` shows fiscal Q4 estimates calculated from
+the original annual 10-K and nine-month 10-Q. Cite both filings and preserve the unverified
+revision status. Keep these estimates out of ratios and TTM. TTM needs four contiguous reconciled
+quarters: never sum balances, EPS or
 weighted shares. FCF is CFO minus reported PP&E payments, preserving signs. Returned margins are
 fractions and dividend coverage is a multiple; use positive denominators, compatible currencies
 and joint revision evidence. A withheld ratio remains unavailable. Company Facts lacks original

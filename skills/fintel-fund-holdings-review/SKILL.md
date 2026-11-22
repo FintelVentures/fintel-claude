@@ -13,6 +13,10 @@ Explain fund/series identity, report period, filing date, top disclosed holdings
 
 NPORT reports are delayed. Native amendments are not ingested; disclose this limitation. Ambiguous or unsupported funds return unavailable coverage. Preserve nulls and unclassified allocation labels. Market-value allocations do not establish net derivatives exposure. Flows use SEC month numbers within the filing’s three-month window, not retrieval months. Do not infer missing dates, full holdings or share-class identity.
 
-Example: “What does this ETF own, and where is its concentration?”
+Coverage requires a supported US listing and an ingested public native N-PORT filing mapped to
+one SEC series through a resolved class ticker or an unambiguous legacy owner. Try US:VTI for an
+ETF or US:ABAEX for a mutual fund with `limit=3`. Both returned holdings in the live reviewer
+check on 23 November 2026. The native store had no filing for the Vanguard 500 Index series
+(S000002839, including VFIAX and VOO) on that date.
 
 Write in the user’s language. Cite material observations with their source dates and clearly identify missing metadata. Read [evaluation cases](references/evaluation-cases.md) when validating this skill or preparing a release.
