@@ -1,6 +1,6 @@
 ---
 name: fintel-screen-builder
-description: Design, validate and execute custom stock screens with Fintel Workbench. Use for compound filters, formulas, rankings, historical screening, backtests and user-requested saved screens; use stock-discovery for existing leaderboard shortlists.
+description: Design, validate and execute custom stock screens with Fintel Workbench. Use for compound filters, formulas, rankings, historical screening and user-requested saved screens; use stock-discovery for existing leaderboard shortlists.
 ---
 
 # Screen builder
@@ -20,7 +20,7 @@ Contract: `screen_builder` / `screen-builder-v3` (portable MCP workflow; does no
 
 ## Execute and retrieve
 
-When the user asks for matching stocks or a count, execute the screen. Call `fintel.run_screen` with exactly one of `program` or an owned `screenId`, plus optional `asOfDate`. The screen runs immediately in the serving JVM. This is one live call with no stored receipt, job queue or polling; do not supply a `requestKey` or call `get_screen_run` for a live screen. It does not create a saved screen.
+When the user asks for matching stocks or a count, execute the screen. Call `fintel.run_screen` with exactly one of `program` or an owned `screenId`, plus optional `asOfDate`. The screen runs immediately in the serving JVM. This is one live call with no stored receipt, job queue or polling; omit `requestKey`. It does not create a saved screen.
 
 Read `structuredContent.data` (also serialized in the MCP text content). The final successful result contains all rows and `total_rows`, with `partial=false`. Streamable HTTP hosts may request `params._meta.progressToken` and receive partial batch notifications in `params._meta["io.fintel/screening"]`; host support determines whether those updates reach the AI. Do not promise universal early result visibility. A preview is incomplete until the final call succeeds. The final rows replace any accumulated preview; do not append them twice.
 
@@ -30,22 +30,16 @@ Report returned country/symbol/name identities, selected values, program, evalua
 
 A failed, cancelled or disconnected call invalidates earlier partial rows as a completed answer. Inspect returned execution errors: refine filters or add a disclosed DSL limit for `result_limit_exceeded`; explain provider/evaluation failures as unavailable evidence. The host can close the active stream to stop a live screen. There is no reconnect/resume receipt; a fresh call starts a new evaluation.
 
-## Saved screens and history
+## Saved screens
 
 For user-requested account work, use `fintel.list_screens` then `fintel.get_screen` to obtain owned IDs and inspect definitions. `fintel.create_screen`, `fintel.update_screen` and `fintel.delete_screen` persist changes visible in Workbench; explain the concrete change and require explicit user intent. A request to find stocks does not authorize saving, replacing or deleting a definition. Updates replace the definition; omitted summary clears it. Deletion also removes related stored results/history/backtests.
 
-`fintel.get_screen_performance` reads stored scheduled history. `fintel.list_screen_backtests` and `fintel.get_screen_backtest` read existing saved web artifacts.
+Historical replay and backtest results are available through Workbench outside this MCP connection. If asked for a replay, explain the availability and label any proposed screening program as unexecuted.
 
-For a requested new historical replay, validate then call `fintel.run_screen_backtest` with program XOR screenId, `startDate`, `endDate`, `interval` (`day`, `week`, `month`) and optional `requestKey`. Poll/page with `fintel.get_screen_run`; use returned `run_id` as `runId` and `next_offset` as `offset`. Follow live date/evaluation limits. This is trade-membership replay with mean closed-trade return, not portfolio total return. It omits portfolio weights, cash, slippage, costs, dividend reinvestment and benchmark total returns; open positions are unmarked. Disclose current-universe and publication-time limitations before interpreting performance.
-
-Examples: “Find US small caps trading below net assets”; “How many companies match these criteria?”; “Save this validated screen”; “Backtest this screen monthly over the last year.”
+Examples: “Find US small caps trading below net assets”; “How many companies match these criteria?”; “Save this validated screen”.
 
 Read [evaluation cases](references/evaluation-cases.md) when validating this skill or preparing a release.
 
 Preserve validation currency/unit diagnostics, not just syntax success. Do not combine incompatible
 monetary metrics or interpret fraction/whole-percent units from a name alone. Historical FX must
-use the returned dated evidence, not today's rate. For backtest receipts, read `run_id` as `runId`
-and page with returned `next_offset` as `offset` through terminal status and all result pages.
-`fintel.cancel_screen_run` is destructive for a historical receipt: it discards partial results
-and cannot resume the run. Explain that effect and require an explicit cancellation request;
-closing a live screen stream is a separate action.
+use the returned dated evidence, not today's rate.

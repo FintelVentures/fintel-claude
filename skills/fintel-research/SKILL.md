@@ -38,7 +38,7 @@ and consolidated list developments to `fintel-watchlist-briefing`. Options marke
 - Rankings: `fintel.get_security_rankings`, `fintel.list_leaderboards`, `fintel.get_leaderboard`.
 - Definitions and individual metrics: `fintel.list_data_definitions`, `fintel.get_data_definition`, `fintel.get_security_data_point`. Use exact returned keys and units.
 - Changes: `fintel.get_security_changes` and `fintel.get_securities_changes` for retained filings, insider forms, analyst actions and estimate endpoint changes; page with returned `meta.next_args`. Empty events do not prove unchanged conditions.
-- Custom screens: `fintel.get_screening_capabilities`, `fintel.validate_screen`, `fintel.run_screen`, `fintel.get_screen_run`; use screen-builder for execution, owned saved-screen operations and historical replays. Live execution returns rows in the same call without a receipt or polling. `get_screen_run` is for historical backtest receipts. A criteria preview alone is unexecuted.
+- Custom screens: `fintel.get_screening_capabilities`, `fintel.validate_screen`, `fintel.run_screen`; use screen-builder for execution and owned saved-screen operations. Live execution returns rows in the same call. A criteria preview alone is unexecuted.
 - The user's account and lists: `fintel.get_account`, `fintel.list_stock_lists`, `fintel.get_stock_list`, `fintel.list_stock_list_items`. Restrict private reads to account-related requests.
 
 Filing-based data lags the period end. Keep report periods separate from filing and retrieval dates. Top-N excerpts cannot establish absent holdings or whole-portfolio overlap. Numeric values returned as normalized dollars do not need an additional historical thousands conversion.
@@ -59,8 +59,7 @@ Filing-based data lags the period end. Keep report periods separate from filing 
 - Analysis is not authorization. Never create, change or delete anything in the user's Fintel
   account (stock lists, alerts, notebooks, team content, saved screen definitions) without describing
   the concrete change and obtaining explicit user intent. Read-only lookups need none. A request
-  to execute a live screen authorizes that call; a historical backtest creates a private expiring
-  receipt. Saving a definition is separate.
+  to execute a live screen authorizes that call. Saving a definition requires explicit intent.
 - This is research support, not personalized investment advice.
 
 For macro questions, retain the provider citation/source link, economic date, retrieval time and
